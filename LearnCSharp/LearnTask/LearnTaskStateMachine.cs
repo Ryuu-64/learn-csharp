@@ -1,6 +1,6 @@
 ﻿using System.Runtime.CompilerServices;
 
-namespace LearnCSharp;
+namespace LearnCSharp.LearnTask;
 
 public static class LearnTaskStateMachine
 {

@@ -1,23 +1,12 @@
-﻿namespace LearnCSharp;
+﻿namespace LearnCSharp.LearnTask;
 
 public static class LearnAsyncVoid
 {
-    public static void Main()
-    {
-        Task.WaitAll(
-            InvokeAsyncTask(),
-            InvokeAsyncTaskWithTryCatch(),
-            InvokeAsyncVoid(),
-            InvokeTaskFromTaskCompletionSource(),
-            InvokeAsyncVoidWithTryCatch()
-        );
-    }
-
     /// <summary>
     /// async void 方法只能直接调用而无法被 await
     /// 因为 void 不是 awaitable，而 Task 是 awaitable
     /// </summary>
-    private static async Task InvokeAsyncVoid()
+    public static async Task InvokeAsyncVoid()
     {
         // Type 'void' is not awaitable
         // await TestAsyncVoid();
@@ -30,7 +19,7 @@ public static class LearnAsyncVoid
     /// <summary>
     /// async Task 方法可以被 await，因为 Task 是 awaitable
     /// </summary>
-    private static async Task InvokeAsyncTask()
+    public static async Task InvokeAsyncTask()
     {
         await AsyncTask();
         // 不需要再 await Task.Delay(1000) 了，因为 async Task 可以被 await
@@ -39,7 +28,7 @@ public static class LearnAsyncVoid
     /// <summary>
     /// async Task 方法中的异常可以被外部捕获
     /// </summary>
-    private static async Task InvokeAsyncTaskWithTryCatch()
+    public static async Task InvokeAsyncTaskWithTryCatch()
     {
         try
         {
@@ -56,7 +45,7 @@ public static class LearnAsyncVoid
     /// 
     /// <see cref="InvokeTaskFromTaskCompletionSource"/>
     /// </summary>
-    private static async Task InvokeAsyncVoidWithTryCatch()
+    public static async Task InvokeAsyncVoidWithTryCatch()
     {
         try
         {
@@ -84,8 +73,8 @@ public static class LearnAsyncVoid
         Console.WriteLine("async Task 执行中...");
         throw new Exception("来自 async Task 的异常");
     }
-    
-    private static async Task InvokeTaskFromTaskCompletionSource()
+
+    public static async Task InvokeTaskFromTaskCompletionSource()
     {
         try
         {
