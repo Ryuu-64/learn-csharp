@@ -1,4 +1,4 @@
-﻿namespace LearnCSharp.LearnTask;
+﻿namespace LearnCSharpLibrary.LearnTask;
 
 public static class LearnAsyncVoid
 {

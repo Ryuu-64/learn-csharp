@@ -22,7 +22,7 @@
     </ItemGroup>
 
     <ItemGroup>
-      <ProjectReference Include="..\LearnCSharp\LearnCSharp.csproj" />
+        <ProjectReference Include="..\LearnCSharp\LearnCSharpLibrary.csproj"/>
     </ItemGroup>
 
 </Project>

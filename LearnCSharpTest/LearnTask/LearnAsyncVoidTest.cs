@@ -1,4 +1,4 @@
-﻿using LearnCSharp.LearnTask;
+﻿using LearnCSharpLibrary.LearnTask;
 
 namespace LearnCSharpTest.LearnTask;
 
