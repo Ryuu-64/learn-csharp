@@ -6,9 +6,53 @@ internal static class Program
 {
     public static void Main()
     {
-        StartStructEnum();
+        StartStructRangeWithIEnumeratorBenchmark();
+        StartStructRangeWithStructEnumeratorBenchmark();
         StartStructEnumBenchmark();
         StartClassEnumBenchmark();
+    }
+
+    private static void StartStructRangeWithIEnumeratorBenchmark()
+    {
+        
+        GC.Collect();
+        GC.TryStartNoGCRegion(1024 * 1024);
+
+        long before = GC.GetAllocatedBytesForCurrentThread();
+
+        var sum = 0;
+        foreach (int i in new StructRangeWithIEnumerator(5))
+        {
+            sum += i;
+        }
+
+        long after = GC.GetAllocatedBytesForCurrentThread();
+
+        GC.EndNoGCRegion();
+
+        Console.WriteLine($"Sum = {sum}");
+        Console.WriteLine($"Allocated bytes delta = {after - before}");
+    }
+
+    private static void StartStructRangeWithStructEnumeratorBenchmark()
+    {
+        GC.Collect();
+        GC.TryStartNoGCRegion(1024 * 1024);
+
+        long before = GC.GetAllocatedBytesForCurrentThread();
+
+        var sum = 0;
+        foreach (int i in new StructRangeWithStructEnumerator(5))
+        {
+            sum += i;
+        }
+
+        long after = GC.GetAllocatedBytesForCurrentThread();
+
+        GC.EndNoGCRegion();
+
+        Console.WriteLine($"Sum = {sum}");
+        Console.WriteLine($"Allocated bytes delta = {after - before}");
     }
 
     private static void StartStructEnumBenchmark()
@@ -57,28 +101,6 @@ internal static class Program
 
         long after = GC.GetAllocatedBytesForCurrentThread();
 
-        Console.WriteLine($"Allocated bytes delta = {after - before}");
-    }
-
-
-    private static void StartStructEnum()
-    {
-        GC.Collect();
-        GC.TryStartNoGCRegion(1024 * 1024);
-
-        long before = GC.GetAllocatedBytesForCurrentThread();
-
-        var sum = 0;
-        foreach (int i in new StructRange(5))
-        {
-            sum += i;
-        }
-
-        long after = GC.GetAllocatedBytesForCurrentThread();
-
-        GC.EndNoGCRegion();
-
-        Console.WriteLine($"Sum = {sum}");
         Console.WriteLine($"Allocated bytes delta = {after - before}");
     }
 }
